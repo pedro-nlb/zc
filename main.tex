@@ -60,7 +60,7 @@
 \usepackage{float}
 % Improved interface for floating objects such as figures and tables, introducing for example the H modifier to force the position of a float in the page or the boxed float. Should be loaded before hyperref.
 
-\usepackage[backref]{hyperref}
+\usepackage[backref=page]{hyperref}
 % To handle cross-referencing and produce hypertext links in the document. It should be loaded last (with few exceptions), because it redefines many LaTeX commands.
 % The backref option inserts links on each bibliography entry to the pages in which the citation was used.
 %% The hidelinks option removes colors and boxes around links, but the links remain clickable. On firefox the links are even highlighted when the mouse pointer passes over them.
@@ -416,6 +416,17 @@ mark = at position 0.5 with
 }
 \makeatother
 
+\usepackage{tikz}
+
+\newcounter{mybox}
+\newcommand\tikzmark[1]{%
+\tikz[remember picture,overlay] \node[inner xsep=0pt] (#1) {};
+}
+\newcommand\ColorBox[2][]{%
+\stepcounter{mybox}%
+\node[draw=red!70!black,fill=red!20,align=left,#1] (box\themybox) {#2};
+}
+
 %%% Author, title, etc.
 
 % Author info
@@ -432,7 +443,7 @@ mark = at position 0.5 with
 %\keywords{...}
 %\subjclass[...]{...}
 \title[Zariski Cancellation]{Zariski Cancellation}
-\date{\today}
+\date{4th November 2020}
 
 % Links and pdf options
 \makeatletter
@@ -451,6 +462,14 @@ mark = at position 0.5 with
   urlcolor=linkred}
 \makeatother
 
+\tikzset{
+    symbol/.style={
+	draw=none,
+	every to/.append style={
+	    edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+    }
+}
+
 % Math operators
 \DeclareMathOperator{\Hom}{Hom}
 
@@ -465,8 +484,107 @@ mark = at position 0.5 with
 
 \maketitle
 
+\begin{abstract}
+    Following \cite{hoc72} we provide an example of rings\footnote{We only consider the category of commutative rings with $1$.} $B,C$ such that $B\not\cong C$ but $B[t]\cong C[t]$, where $t$ is an indeterminate.
+    As a preparation for this counterexample we also study the notion of projective module and the hairy ball theorem.	
+\end{abstract}
+
 \tableofcontents
 
+\begin{center}
+    \textcolor{gray}{---parts in gray will be omitted during the talk---}
+\end{center}
+
+\section{Introduction}
+
+Let $R$ be a ring.
+We can form the polynomial ring $R[t]$ in one variable $t$ with coefficients in $R$.
+This construction is functorial, and hence
+\[ R\cong S \Rightarrow R[t]\cong S[t]. \]
+The goal of this talk is to show with an explicit counterexample due to Hochster \cite{hoc72} that the converse is not true.
+
+In the process of constructing this counterexample we will come across a projective module which, as a consequence of the hairy ball theorem, is not a free module.
+Therefore we will discuss projective modules and the hairy ball theorem before jumping into the counterexample.
+
+\section{Projective modules}
+
+\begin{defn}
+    Let $\calC$ be a category.
+    An object $P\in \calC$ is called \textit{projective} if the following lifting problem can always be solved:
+    
+    \begin{center}
+	\begin{tikzcd}
+	    & M\arrow[twoheadrightarrow]{d}{\text{epi}} \\
+	    P\arrow{r}\arrow[dashed]{ur} & N
+	\end{tikzcd}
+    \end{center}
+\end{defn}
+
+\begin{lm}
+    Let $\calA$ be an abelian category and let $P\in \calA$ be an object.
+    The following are equivalent:
+    \begin{enumerate}
+	\item $P$ is projective.
+	\item $\Hom_{\calA}(P,-)$ is exact.
+	\item Every short exact sequence of the form
+	    \[ 0 \to N\to M\to P\to 0 \]
+	    splits.
+    \end{enumerate}
+    \begin{proof}
+	We start with $(1)\Rightarrow (2)$.
+	Assume $P$ is projective and consider a short exact sequence
+	\[ 0 \to A\to B\to C\to 0. \]
+	Since $\Hom_{\calA}(P,-)$ is always left exact, we only need to show that the induced map $\Hom_{\calA}(P,B)\to \Hom_{\calA}(P,C)$ is surjective.
+	But $B\to C$ is an epimorphism, so this is precisely what $P$ being projective means by definition.
+
+	Next we show $(2)\Rightarrow (3)$.
+	Assume $\Hom_{\calA}(P,-)$ is exact and consider a short exact sequence
+	\[ 0\to N\to M\to P\to 0. \]
+	Applying $\Hom_{\calA}(P,-)$ we get a surjection $\Hom_{\calA}(P,M)\to \Hom_{\calA}(P,P)$, and the identity on $P$ comes then from the desired section $\sigma\colon P\to M$.
+
+	Let us check finally that $(3)\Rightarrow (1)$.
+	We are given the following situation:
+	\begin{center}
+	    \begin{tikzcd}
+		 & M\arrow[twoheadrightarrow]{d}{\text{epi}} \\
+		 P\arrow{r} & N
+	    \end{tikzcd}
+	\end{center}
+	All finite limits exist in $\calA$, so we may consider the cartesian square
+	\begin{center}
+	    \begin{tikzcd}
+		P\times_{N} M\arrow[swap]{d}{f}\arrow{r}{g} & M\arrow[twoheadrightarrow]{d}{\text{epi}} \\
+		P\arrow{r} & N
+	    \end{tikzcd}
+	\end{center}
+	Epimorphisms are stable under pullback in abelian categories, so $f$ is also an epimorphism.
+	By assumption, we can find a section $\sigma\colon P\to P\times_{N}M$ splitting the corresponding short exact sequence.
+	The composition $g\circ \sigma\colon P\to M$ is then the desired lift.
+    \end{proof}
+\end{lm}
+
+Let us look now at the abelian category of modules over a ring $R$.
+What does it mean for an $R$-module to be projective?
+
+\vspace{8mm}
+\begin{tikzpicture}[remember picture,overlay]
+    \ColorBox[xshift=23mm,fill=red!30,draw=red]{non ppal. ideal \\ \hspace{4mm}over a DD \\ \hspace{11.5mm}$\neq$ }
+    \ColorBox[xshift=57mm,fill=red!30,draw=red]{\hspace{4mm}$\Q$ \\ over $\Z$ \\ \hspace{4.5mm}$\neq$ }
+    \ColorBox[xshift=83mm,fill=red!30,draw=red]{\hspace{5mm}$(x,y)$ \\ over $\C[x,y]$ \\ \hspace{7mm}$\neq$ }
+\end{tikzpicture}
+\vspace{10mm}
+\begin{center}
+    \begin{tikzcd}
+	\{ \text{Free} \} \tikzmark{a}\arrow[symbol=\subseteq]{r} & \{ \text{Projective} \} \tikzmark{b}\arrow[symbol=\subseteq]{r} & \{ \text{Flat} \} \arrow[symbol=\subseteq]{r} & \{ \text{Torsion-free} \}
+    \end{tikzcd}
+\end{center}
+\vspace{6mm}
+\begin{tikzpicture}[remember picture,overlay]
+    \ColorBox[xshift=27.5mm,fill=green!30,draw=green]{\hspace{8.5mm} = \\ / PID or local}
+    \ColorBox[xshift=60mm,fill=green!30,draw=green]{\hspace{10mm} = \\ f.g. / Noeth.}
+    \ColorBox[xshift=86mm,fill=green!30,draw=green]{\hspace{2mm} = \\ / DD}
+\end{tikzpicture}
+\vspace{5mm}
 
 
 \bibliographystyle{alpha}
