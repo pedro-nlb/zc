@@ -472,6 +472,9 @@ mark = at position 0.5 with
 
 % Math operators
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\id}{id}
 
 % Other commands
 \newcommand{\ot}{\otimes}
@@ -520,12 +523,12 @@ Therefore we will discuss projective modules and the hairy ball theorem before j
     \end{center}
 \end{defn}
 
-\begin{lm}
+\begin{lm}\label{lm:projective}
     Let $\calA$ be an abelian category and let $P\in \calA$ be an object.
     The following are equivalent:
     \begin{enumerate}
 	\item $P$ is projective.
-	\item $\Hom_{\calA}(P,-)$ is exact.
+	\item $\Hom(P,-)$ is exact.
 	\item Every short exact sequence of the form
 	    \[ 0 \to N\to M\to P\to 0 \]
 	    splits.
@@ -534,15 +537,17 @@ Therefore we will discuss projective modules and the hairy ball theorem before j
 	We start with $(1)\Rightarrow (2)$.
 	Assume $P$ is projective and consider a short exact sequence
 	\[ 0 \to A\to B\to C\to 0. \]
-	Since $\Hom_{\calA}(P,-)$ is always left exact, we only need to show that the induced map $\Hom_{\calA}(P,B)\to \Hom_{\calA}(P,C)$ is surjective.
+	Since $\Hom(P,-)$ is always left exact, we only need to show that the induced map $\Hom(P,B)\to \Hom(P,C)$ is surjective.
 	But $B\to C$ is an epimorphism, so this is precisely what $P$ being projective means by definition.
 
 	Next we show $(2)\Rightarrow (3)$.
-	Assume $\Hom_{\calA}(P,-)$ is exact and consider a short exact sequence
+	Assume $\Hom(P,-)$ is exact and consider a short exact sequence
 	\[ 0\to N\to M\to P\to 0. \]
-	Applying $\Hom_{\calA}(P,-)$ we get a surjection $\Hom_{\calA}(P,M)\to \Hom_{\calA}(P,P)$, and the identity on $P$ comes then from the desired section $\sigma\colon P\to M$.
+	Applying $\Hom(P,-)$ we get a surjection $\Hom(P,M)\to \Hom(P,P)$, and the identity on $P$ comes then from the desired section $\sigma\colon P\to M$.
 
-	Let us check finally that $(3)\Rightarrow (1)$.
+	The implication $(3)\Rightarrow (1)$ is left as an exercise during the talk.
+	The hint is that epimorphisms are stable under pullback in abelian categories, and the solution follows in gray.
+	{\color{gray}
 	We are given the following situation:
 	\begin{center}
 	    \begin{tikzcd}
@@ -560,6 +565,7 @@ Therefore we will discuss projective modules and the hairy ball theorem before j
 	Epimorphisms are stable under pullback in abelian categories, so $f$ is also an epimorphism.
 	By assumption, we can find a section $\sigma\colon P\to P\times_{N}M$ splitting the corresponding short exact sequence.
 	The composition $g\circ \sigma\colon P\to M$ is then the desired lift.
+	}
     \end{proof}
 \end{lm}
 
@@ -587,6 +593,68 @@ What does it mean for an $R$-module to be projective?
 \vspace{8mm}
 
 In the above diagram, ppal.~stands for principal, DD stands for Dedekind domain, PID stands for principal ideal domain, f.g.~stands for finitely generated and Noeth.~stands for Noetherian.
+
+{\color{gray}
+\begin{proof}
+    To do!
+\end{proof}
+}
+
+\begin{rem}
+    The example of $\Q$ as a $\Z$-module also shows that being projective depends on the base ring, since $\Q$ is projective over itself.
+\end{rem}
+
+\begin{rem}
+    A ring $R$ is called \textit{hereditary} if all submodules of projective $R$-modules are again projective.
+    Dedekind domains can be characterised as hereditary integral domains.
+\end{rem}
+
+\begin{rem}
+    The example of $(x,y)$ as a $\C[x,y]$-module also shows that $\C[x,y]$ is not an hereditary ring, since $\C[x,y]$ is projective over itself but its submodule $(x,y)$ is not flat, thus not projective.
+\end{rem}
+
+\begin{rem}[{\cite{fra18}}]
+    Baer's criterion \cite[Prop.~1.1.1]{fra18} allows us to characterise the dual notion of injective modules only in terms of $\Ext^{1}_{R}$ and quotients of the ring $R$ by its ideals.
+    Indeed, an $R$-module $N$ is injective if and only if $\Ext^{1}_{R}(R/I,N)=0$ for every ideal $I\subseteq R$ \cite[Prop.~1.1.4]{fra18}.
+    In general, no similar criterion for projectivity is available.
+    In fact, the \textit{Whitehead problem} ---which states that if an abelian group $A$ has $\Ext^{1}_{\Z}(A,\Z)=0$, then it is free--- is undecidable in ZFC due to a result of Shelah.
+
+    On the other hand, the notion of flatness, which agrees with projectivity for finitely generated modules over Noetherian rings, does have a general criterion similar to the previous one for injectivity.
+    Namely, an $R$-module $M$ is flat if and only if $\Tor_{1}^{R}(M,R/I)=0$ for every ideal $I\subseteq R$ \cite[Prop.~1.2.3]{fra18}.
+\end{rem}
+
+Nevertheless, projectivity admits a different kind of criterion that will be useful for us later on:
+
+\begin{prop}[{\cite[Lemma 1.1.2]{fra18}}]\label{prop:projective}
+    Let $R$ be a ring.
+    An $R$-module $P$ is projective if and only if it is a direct summand of some free module $F$.
+    Moreover, if $P$ is finitely generated, then we can also choose $F$ to be finitely generated.
+    \begin{proof}
+	If $P$ is (finitely generated) projective, consider a surjection $F\twoheadrightarrow P$ from a (finitely generated) free module $F$.
+	The resulting short exact sequence
+	\[ 0 \to K\to F\to P \to 0 \]
+	splits by \Cref{lm:projective}, hence $P$ is a direct summand of $F$.
+
+	Suppose conversely that $F=P\op K$ and consider a surjection $\varphi\colon M\twoheadrightarrow N$ and a morphism $f\colon P\to N$.
+	Then $\varphi\op \id_{K} \colon M\op K\twoheadrightarrow N\op K$ is again a surjection.
+	Since $F$ is free, the morphism $f\op \id_{K}\colon F\to N\op K$ can be lifted to a morphism $\bar{f}\op \id_{K}\colon F\to M\op K$, so that $\bar{f}\colon P\to M$ is the desired lifting of the original surjection $\varphi\colon M\twoheadrightarrow N$.
+    \end{proof}
+\end{prop}
+
+{\color{gray}
+As a consequence of this criterion we also obtain a characterisation of projectivity for finitely presented modules in terms of $\Ext^{1}_{R}$ and finitely generated modules:
+
+\begin{cor}[{\cite[Cor.~1.1.28]{fra18}}]
+    Let $R$ be a ring.
+    A finitely presented $R$-module $P$ is projective if and only if $\Ext^{1}_{R}(P,T)=0$ for every finitely generated $R$-module $T$.
+    \begin{proof}
+	Pick a presentation
+	\[ 0\to K\to F\to P\to 0 \]
+	with $K$ finitely generated and $F$ finitely generated and free.
+	Then take the long exact sequence of $\Ext^{\bullet}_{R}(P,-)$ and use the assumption to find a splitting of the short exact sequence, exhibiting therefore $P$ as a direct summand of a free module.
+    \end{proof}
+\end{cor}
+}
 
 \bibliographystyle{alpha}
 \bibliography{main}
