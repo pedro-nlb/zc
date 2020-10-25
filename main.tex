@@ -668,6 +668,60 @@ In this section we will prove the hairy ball theorem following \cite{eg79}.
 
 \begin{thm}[Hairy ball theorem]
     Every continuous vector field on the $2$-sphere $\bbS^{2}$ has at least one zero.
+    \begin{proof}
+	We will use the following definitions and identifications:
+	\begin{enumerate}[label=\textbullet]
+	    \item $\bbS^{2}=\{ (x,y,z)\in \R^{3}\mid x^{2}+y^{2}+z^{2}=1 \}$.
+	    \item $\R^{2}=\{ (x,y,z)\in \R^{3}\mid z=0 \}$.
+	    \item $\bbD^{2}=\{ (x,y,0)\in \R^{2}\subseteq \R^{3}\mid x^{2}+y^{2}\leqslant 1 \}$.
+	    \item $\bbS^{1}=\{ (x,y,0)\in \R^{2}\subseteq \R^{3}\mid x^{2}+y^{2}=1\}$.
+	    \item $\bbS^{2}_{+}=\{ (x,y,z)\in \bbS^{2}\subseteq \R^{3}\mid z\geqslant 0 \}$.
+	    \item $\bbS^{2}_{-}=\{ (x,y,z)\in \bbS^{2}\subseteq \R^{3}\mid z\leqslant 0 \}$.
+	    \item For $\vec{v}\in \R^{2}\setminus \{ 0 \}$ we denote by $R_{\vec{v}}\colon \R^{2}\to \R^{2}$ the reflection with respect to the direction defined by $\vec{v}$.
+	\end{enumerate}
+
+	We prove the theorem by contradiction, so suppose that we are given a non-vanishing continuous vector field $X$ on $\bbS^{2}$.
+
+	Let $h\colon \bbD^{2}\to \bbS^{2}_{-}$ be the inverse of the homeomorphism $\bbS^{2}_{-}\cong\bbD^{2}$ induced by the stereographic projection from the north pole $(0,0,1)\in \bbS^{2}$.
+	Let $p\in \bbD^{2}$ be a point.
+	Let $L_{p}$ be the line joining $(0,0,1)$ and $p$, which then intersects $\bbS^{2}_{-}$ precisely at $h(p)$.
+	Let $\vec{v}_{p}$ denote the corresponding tangent vector $X(h(p))$.
+	We consider the line $L'_{p}$ which is parallel to $L_{p}$ and passes through the point $h(p)+\vec{v}_{p}\in \R^{3}$.
+	With this notation, we define a new function
+	\begin{align*}
+	    W\colon \bbD^{2} &\longrightarrow \R^{2} \\
+	    p & \longmapsto (\R^{2}\cap L'_{p})-p.
+	\end{align*}
+
+	\begin{figure}[htp]
+	    \centering
+	    \includegraphics[scale=.4]{HairyBallW.png}
+	\end{figure}
+
+	Since $X$ is a non-vanishing continuous vector field, $W\colon \bbD^{2}\to \R^{2}$ is a non-vanishing continuous function.
+	Therefore it induces a continuous function
+	\begin{align*}
+	    F\colon \bbD^{2} &\longrightarrow \bbS^{1} \\
+	    p &\longmapsto \frac{F(p)}{|F(p)|}.
+	\end{align*}
+	We repeat the same process with the south pole and $\bbS^{2}_{+}$.
+	This gives us a non-vanishing continuous function $W^{*}\colon \bbD^{2}\to \R^{2}$ that we can again normalise into a continuous function $F^{*}\colon \bbD^{2}\to \bbS^{1}$.
+
+	We denote by $f$ and $f^{*}$ the restrictions to $\bbS^{1}\subseteq \bbD^{2}$ of $F$ and $F^{*}$ respectively.
+	By definition $f$ and $f^{*}$ factor through the contractible space $\bbD^{2}$:
+	\begin{center}
+	    \begin{tikzcd}
+		\bbS^{1}\arrow[hook]{dr} \arrow{rr}{f,f^{*}} & & \bbS^{1} \\
+		 & \bbD^{2}\arrow[swap]{ur}{F,F^{*}} &
+	    \end{tikzcd}
+	\end{center}
+	Therefore, they are both nullhomotopic.
+
+	The functions $f,f^{*}\colon \bbS^{1}\to \bbS^{1}$ are also related to each other.
+	Namely, ...
+
+	Let $H\colon \bbS^{1}\times [0,1]\to \bbS^{1}$ be a homotopy from $f$ to the constant map $c\colon \bbS^{1}\to \bbS^{1}$ with constant value the poitn $(-1,0,0)\in \bbS^{1}\subseteq \R^{3}$.
+    \end{proof}
 \end{thm}
 
 \bibliographystyle{alpha}
