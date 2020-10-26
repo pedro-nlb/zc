@@ -488,7 +488,7 @@ mark = at position 0.5 with
 \maketitle
 
 \begin{abstract}
-    Following \cite{hoc72} we provide an example of rings\footnote{We only consider the category of commutative rings with $1$.} $B,C$ such that $B\not\cong C$ but $B[t]\cong C[t]$, where $t$ is an indeterminate.
+    Following \cite{hoc72} we provide an example of rings\footnote{We only consider the category of commutative rings with $1$.} $R,S$ such that $R[t]\cong S[t]$ but $R\not\cong S$, where $t$ is an indeterminate.
     As a preparation for this counterexample we also study the notion of projective module and the hairy ball theorem.	
 \end{abstract}
 
@@ -518,7 +518,7 @@ Therefore we will discuss projective modules and the hairy ball theorem before j
     \begin{center}
 	\begin{tikzcd}
 	    & M\arrow[twoheadrightarrow]{d}{\text{epi}} \\
-	    P\arrow{r}\arrow[dashed]{ur} & N
+	    P\arrow{r}\arrow[dashed]{ur}{\exists} & N
 	\end{tikzcd}
     \end{center}
 \end{defn}
@@ -615,7 +615,7 @@ In the above diagram, ppal.~stands for principal, DD stands for Dedekind domain,
 
 \begin{rem}
     The left-most equality in the diagram above is also true for finitely generated modules over polynomial rings with coefficients on a principal ideal domain.
-    This is am important result, first asked by Serre in the case of fields, and later proven independently by Quillen and Suslin, see the \href{https://en.wikipedia.org/wiki/Quillen-Suslin_theorem}{Wikipedia article on the Quillen--Suslin theorem}.
+    This is an important result, first asked by Serre in the case of fields, and later proven independently by Quillen and Suslin, see the \href{https://en.wikipedia.org/wiki/Quillen-Suslin_theorem}{Wikipedia article on the Quillen--Suslin theorem}.
     It corresponds geometrically to the statement that vector bundles on affine space are all trivial.
 \end{rem}
 
@@ -625,8 +625,9 @@ In the above diagram, ppal.~stands for principal, DD stands for Dedekind domain,
     In general, no similar criterion for projectivity is available.
     In fact, the \textit{Whitehead problem} ---which states that if an abelian group $A$ has $\Ext^{1}_{\Z}(A,\Z)=0$, then it is free--- is undecidable in ZFC due to a result of Shelah.
 
+    {\color{gray}
     On the other hand, the notion of flatness, which agrees with projectivity for finitely generated modules over Noetherian rings, does have a general criterion similar to the previous one for injectivity.
-    Namely, an $R$-module $M$ is flat if and only if $\Tor_{1}^{R}(M,R/I)=0$ for every ideal $I\subseteq R$ \cite[Prop.~1.2.3]{fra18}.
+    Namely, an $R$-module $M$ is flat if and only if $\Tor_{1}^{R}(M,R/I)=0$ for every ideal $I\subseteq R$ \cite[Prop.~1.2.3]{fra18}.}
 \end{rem}
 
 Nevertheless, projectivity admits a different kind of criterion that will be useful for us later on:
@@ -677,16 +678,15 @@ In this section we will prove the hairy ball theorem following \cite{eg79}.
 	    \item $\bbS^{1}=\{ (x,y,0)\in \R^{2}\subseteq \R^{3}\mid x^{2}+y^{2}=1\}$.
 	    \item $\bbS^{2}_{+}=\{ (x,y,z)\in \bbS^{2}\subseteq \R^{3}\mid z\geqslant 0 \}$.
 	    \item $\bbS^{2}_{-}=\{ (x,y,z)\in \bbS^{2}\subseteq \R^{3}\mid z\leqslant 0 \}$.
-	    \item For $\vec{v}\in \R^{2}\setminus \{ 0 \}$ we denote by $R_{\vec{v}}\colon \R^{2}\to \R^{2}$ the reflection with respect to the direction defined by $\vec{v}$.
+	    \item For $p=(x,y)\in \bbS^{1}\subseteq \R^{2}$ we denote by $R_{p}\colon \R^{2}\to \R^{2}$ the linear reflection with axis the direcction defined by the vector $(-y,x)$, tangent to $\bbS^{1}$ at $p$.
 	\end{enumerate}
 
-	We prove the theorem by contradiction, so suppose that we are given a non-vanishing continuous vector field $X$ on $\bbS^{2}$.
+	We prove the theorem by contradiction, so suppose that we are given a non-vanishing continuous vector field $X\colon \bbS^{2}\to T\bbS^{2}$ on $\bbS^{2}$.
 
 	Let $h\colon \bbD^{2}\to \bbS^{2}_{-}$ be the inverse of the homeomorphism $\bbS^{2}_{-}\cong\bbD^{2}$ induced by the stereographic projection from the north pole $(0,0,1)\in \bbS^{2}$.
 	Let $p\in \bbD^{2}$ be a point.
 	Let $L_{p}$ be the line joining $(0,0,1)$ and $p$, which then intersects $\bbS^{2}_{-}$ precisely at $h(p)$.
-	Let $\vec{v}_{p}$ denote the corresponding tangent vector $X(h(p))$.
-	We consider the line $L'_{p}$ which is parallel to $L_{p}$ and passes through the point $h(p)+\vec{v}_{p}\in \R^{3}$.
+	We consider the line $L'_{p}$ which is parallel to $L_{p}$ and passes through the point $h(p)+X(h(p))\in \R^{3}$.
 	With this notation, we define a new function
 	\begin{align*}
 	    W\colon \bbD^{2} &\longrightarrow \R^{2} \\
@@ -717,10 +717,52 @@ In this section we will prove the hairy ball theorem following \cite{eg79}.
 	\end{center}
 	Therefore, they are both nullhomotopic.
 
-	The functions $f,f^{*}\colon \bbS^{1}\to \bbS^{1}$ are also related to each other.
-	Namely, ...
+	To obtain the desired contradiction, we will next find a certain relation between the functions $f$ and $f^{*}$, which is in turn induced by a relation between $W|_{\bbS^{1}}$ and $W^{*}|_{\bbS^{1}}$.
+	Namely, given a point $p=h(p)=(x_{0},y_{0},0)\in \bbS^{1}\subseteq \bbD^{2}$, we claim that
+	\begin{equation}
+	    W^{*}(p)=R_{p}(W(p)).
+	\end{equation}
+	Recall that this means that the vector $W^{*}(p)$ is the linear reflection of $W(p)$ across the axis given by the direction defined by $(-y_{0},x_{0},0)\in \R^{2}$.
+	In order to prove this, we fix an arbitrary $p=(x_{0},y_{0},0)\in \bbS^{1}$ and we change the coordinate system, making $p$ the origin, $(x_{0},y_{0},0)$ the first basis vector in $\R^{2}$ and $(-y_{0},x_{0},0)$ the second basis vector in $\R^{2}$.
+	We express $W(p)$ and $W^{*}(p)$ with respect to these coordinates:
+	\[ W(p)=(w_{1},w_{2},0) \text{ and } W^{*}(p)=(w_{1}^{*},w_{2}^{*},0). \]
+	The claim is then that $w_{1}=-w_{1}^{*}$ and $w_{2}=w_{2}^{*}$.
 
+	We check first that $w_{2}=w_{2}^{*}$.
+	Let $L_{p}$ resp.~$L_{p}^{*}$ denote the line joining $p$ to the north resp.~south pole.
+	These two lines intersect at $p$ and define a plane $\Pi$ which intersects $\R^{2}$ precisely along the $x$-axis of our current coordinate system.
+	Let $L_{p}'$ resp.~$(L_{p}^{*})'$ be the lines with directions equal to those of $L_{p}$ resp.~$L_{p}^{*}$ containing the point $p+X(p)$.
+	The plane $\Pi'$ defined by these two lines is then parallel to $\Pi$, and therefore the intersection $\Pi'\cap \R^{2}$ is parallel to the $x$-axis of our current coordinate system.
+	This implies that $w_{2}=w_{2}^{*}$.
+
+	To check that $w_{1}=w_{1}^{*}$ we argue projecting the whole picture into the plane spanned by the vectors $(x_{0},y_{0},0)$ and $(0,0,1)$.
+	From this point of view we see the following picture:
+	
+	\begin{figure}[htp]
+	    \centering
+	    \includegraphics[scale=.4]{HairyBall1.png}
+	\end{figure}
+
+	From Thales' theorem we know that $L_{p}$ and $L^{*}_{p}$ intersect at a right angle.
+	From Proposition $29$ in Book I of Euclid's \textit{Elements} we deduce that all other angles that seem to be right angles in the picture are in fact right angles.
+	From the fact that the inner angles of any triangle add up to two right angles we deduce in turn that all angles that look like half a right angle in the picture are in fact half a right angle.
+	Indeed, we can start by ensuring that the inner angle between $L_{p}$ and $W^{*}(p)$ is half a right angle, which follows from the fact that the triangle with vertices $p$, the usual origin of $\R^{3}$ and the north pole is isosceles with a right angle at the usual origin of $\R^{3}$.
+	Then, knowing already that the inner angle between $W^{*}(p)$ and $X(p)$ is a right angle, we deduce from this that the inner angle between $L_{p}$ and $X(p)$ is also half a right angle, and so on.
+	This implies that all four small triangles in the picture are congruent, and in particular $w_{1}=w_{1}^{*}$.
+
+	We are finally ready to exhibit the desired contradiction.
 	Let $H\colon \bbS^{1}\times [0,1]\to \bbS^{1}$ be a homotopy from $f$ to the constant map $c\colon \bbS^{1}\to \bbS^{1}$ with constant value the poitn $(-1,0,0)\in \bbS^{1}\subseteq \R^{3}$.
+	The formula
+	\begin{align*}
+	    H^{*}\colon \bbS^{1}\times [0,1] & \longrightarrow \bbS^{1} \\
+	    (p,t) & \longmapsto R_{p}(H(p,t))
+	\end{align*}
+	defines a homotopy between the nullhomotopic map $f^{*}\colon \bbS^{1}\to \bbS^{1}$ and the map
+	\begin{align*}
+	    c^{*}\colon \bbS^{1} & \longrightarrow \bbS^{1} \\
+	    p  & \longmapsto R_{p}((-1,0,0))
+	\end{align*}
+	But this is a contradiction, because $c^{*}\colon \bbS^{1}\to \bbS^{1}$ is the morphism going twice around $\bbS^{1}$ at constant speed and starting from $(1,0,0)$, which is not nullhomotopic.
     \end{proof}
 \end{thm}
 
