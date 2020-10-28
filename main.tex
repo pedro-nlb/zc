@@ -766,10 +766,42 @@ In this section we will prove the hairy ball theorem following \cite{eg79}.
     \end{proof}
 \end{thm}
 
-If we take the tubular neighbourhood theorem \cite[Thm.~II.11.4]{bre93} and the Lefschetz--Hopf fixed point theorem \cite[Thm.~IV.23.4]{bre93} for granted, we can prove a much more general statement:
+If we take the Whitney embedding theorem \cite[Theorem II.10.7]{bre93}, the tubular neighbourhood theorem \cite[Theorem II.11.4]{bre93} and the Lefschetz--Hopf fixed point theorem \cite[Theorem IV.23.4]{bre93} for granted, we can prove a much more general statement:
 
-\begin{thm}[{\cite[Cor.~IV.23.6]{bre93}}]
+\begin{thm}[{\cite[Corollary IV.23.6]{bre93}}]
     If $M$ is a compact smooth manifold with Euler characteristic $\chi(M)\neq 0$, then any continuous vector field on $M$ has a zero.
+    \begin{proof}
+	We show that if $M$ admits a non-vanishing continuous vector field, then it has Euler characteristic $\chi(M)=0$.
+	So let $X\colon M\to TM$ be a non-vanishing continuous vector field on $M$.
+
+	The Whitney embedding theorem \cite[Theorem II.10.7]{bre93} allows us to assume that $M\subseteq \R^{N}$ is a compact smooth submanifold.
+	The tubular neighbourhood theorem \cite[Theorem II.11.4]{bre93} ensures the existence of a small enough real number $\varepsilon >0$ such that the sum in $\R^{N}$ yields a diffeomorphism
+	\[ \theta\colon \{ (x,v)\in M\times \R^{N}\mid v\perp T_{x}M, \lVert v \rVert<\varepsilon \} \cong \{ y\in \R^{N}\mid \operatorname{dist}(M,y)<\varepsilon\} \]
+	from the open subset $N_{\varepsilon}M$ of the normal bundle consisting of normal vectors with norm less than $\varepsilon$ to an $\varepsilon$-neighbourhood $B_{\varepsilon}M$ of $M$ in $\R^{N}$, which we refer to as a \textit{tubular neighbourhood} of $M$ in $\R^{N}$.
+	The projection from the normal bundle $\pi\colon NM\to M$ induces a smooth strong deformation retraction $r\colon B_{\varepsilon}M\to M\subseteq B_{\varepsilon}M$ given by $y\mapsto \pi(\theta^{-1}(y))$.
+	The smooth homotopy that shows that $r$ is a smooth strong deformation retraction \cite[Definition I.14.8]{bre93} is
+	\begin{align*}
+	    F\colon B_{\varepsilon}M\times [0,1] & \longrightarrow B_{\varepsilon}M \\
+	    (\theta(x,v),t) & \longmapsto \theta(x,tv)
+	\end{align*}
+	Since $M$ is compact, we may assume ---up to multiplying $X$ by a small enough scalar--- that $\lVert X(x) \rVert<\varepsilon$ for all $x\in M$.
+	We define then
+	\begin{align*}
+	    f\colon M &\longrightarrow M\\
+	    x &\longmapsto r(x+X(x)).
+	\end{align*}
+	Geometrically, we are projecting the point $x+X(x)\in \R^{N}$ onto $M$ along the normal direction:
+
+	\todo{figure}
+
+	If $f(x)=x$, then the tangent direction of $X(x)$ is zero.
+	But $X(x)$ was by assumption a tangent vector at $x\in M$, so $X(x)=0$, contradicting the assumption that $X$ is non-vanishing.
+	Thus $f$ has no fixed points.
+
+	We have also shown as a consequence of the Whitney embedding theorem that $M$ is an euclidean neighbourhood retract.
+	Namely, $M$ is a retract of the open subset $B_{\varepsilon}M\subseteq \R^{N}$.
+	Therefore we may apply the Lefschetz--Hopf fixed point theorem \cite[Corollary IV.23.5]{bre93} to deduce that
+    \end{proof}
 \end{thm}
 
 \bibliographystyle{alpha}
