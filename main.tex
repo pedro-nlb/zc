@@ -632,7 +632,7 @@ We also point out under what assumptions we do get an equality, shown in green b
 
 \vspace{8mm}
 \begin{tikzpicture}[remember picture,overlay]
-    \ColorBox[xshift=23mm,fill=red!30,draw=red]{ \hspace{0.5mm}$(2,1+\sqrt{-5})$ \\ over $\Z[\sqrt{-5}]$ \\ \hspace{9.5mm}$\neq$ }
+    \ColorBox[xshift=23mm,fill=red!30,draw=red]{ \hspace{0.5mm}$(2,1+\scalebox{.8}{$\sqrt{-5}$})$ \\ over $\Z[\scalebox{.8}{$\sqrt{-5}$}]$ \\ \hspace{9.5mm}$\neq$ }
     \ColorBox[xshift=57mm,fill=red!30,draw=red]{\hspace{4mm}$\Q$ \\ over $\Z$ \\ \hspace{4.5mm}$\neq$ }
     \ColorBox[xshift=83mm,fill=red!30,draw=red]{\hspace{5mm}$(x,y)$ \\ over $\C[x,y]$ \\ \hspace{7mm}$\neq$ }
 \end{tikzpicture}
@@ -645,16 +645,23 @@ We also point out under what assumptions we do get an equality, shown in green b
 \vspace{6mm}
 \begin{tikzpicture}[remember picture,overlay]
     \ColorBox[xshift=27.5mm,fill=green!30,draw=green]{\hspace{11.5mm} = \\ over PID or local}
-    \ColorBox[xshift=62mm,fill=green!30,draw=green]{\hspace{10.5mm} = \\ f.g. over Noeth.}
+    \ColorBox[xshift=62mm,fill=green!30,draw=green]{\hspace{10.5mm} = \\ f.g. over noeth.}
     \ColorBox[xshift=88mm,fill=green!30,draw=green]{\hspace{3mm} = \\ over DD}
 \end{tikzpicture}
 \vspace{8mm}
 
-In the above diagram, DD stands for Dedekind domain \cite[Definition I.3.2]{neu99}, PID stands for principal ideal domain, f.g.~stands for finitely generated and Noeth.~stands for Noetherian.
+In the above diagram, DD stands for Dedekind domain \cite[Definition I.3.2]{neu99}, PID stands for principal ideal domain, f.g.~stands for finitely generated and noeth.~stands for noetherian.
 
 {\color{gray}
 \begin{proof}
-    The first example is treated in \cite[Example 13.8]{gat14}.
+    The first example is discussed in \cite[Example 13.8]{gat14}.
+    Instead of reproducing Gathmann's discussion, let us argue why the ring $\Z[\scalebox{.9}{$\sqrt{-5}$}]$ was a natural place to look for such an examples, which also hints on how to produce similar examples.
+    Dedekind domains are hereditary rings, so all ideals are projective.
+    One would then try to find a non principal ideal on a Dedekind domain, which then has necessarily a minimal number of two generators \cite[Exercise I.3.6]{neu99}.
+    A Dedekind domain is a principal ideal domain if and only if it is a unique factorisation domain \cite[Proposition 13.27]{gat14}, so good candidates to look for non principal ideals are rings of integers of number fields in which we know that there is no unique factorisation into prime elements, such as $\Z[\scalebox{.9}{$\sqrt{-5}$}]$.
+
+    That every projective module over a principal ideal domain is free follows from \Cref{prop:projective} and the fact that submodules of free modules over principal ideal domains are again free \cite[Theorem 9.8]{rot02}.
+    That every projective module over a local ring is free is a result due to Kaplansky \cite[Corollary 26.7]{af92}, but easier proofs are available in the case of finitely generated modules over a noetherian local ring \cite[Proposition 1.3.1]{fra18}.
 \end{proof}
 }
 
@@ -684,7 +691,7 @@ In the above diagram, DD stands for Dedekind domain \cite[Definition I.3.2]{neu9
     In general, no similar criterion for projectivity is available.
     In fact, the \textit{Whitehead problem} ---which states that if an abelian group $A$ has $\Ext^{1}_{\Z}(A,\Z)=0$, then it is free--- is undecidable in ZFC due to a result of Shelah.
 
-    On the other hand, the notion of flatness, which agrees with projectivity for finitely generated modules over Noetherian rings, does have a general criterion similar to the previous one for injectivity.
+    On the other hand, the notion of flatness, which agrees with projectivity for finitely generated modules over noetherian rings, does have a general criterion similar to the previous one for injectivity.
     Namely, an $R$-module $M$ is flat if and only if $\Tor_{1}^{R}(M,R/I)=0$ for every ideal $I\subseteq R$ \cite[Prop.~1.2.3]{fra18}.
 \end{rem}
 }
