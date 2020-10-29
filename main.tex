@@ -626,9 +626,13 @@ Finally, that every flat module $M$ is torsion-free follows from the computation
 Namely, if $r\in R$ is not a zero-divisor, then
 \[ 0=\Tor^{R}_{1}(M,R/rR)\cong \ker(M\xrightarrow{r\cdot (-)}M). \]
 
+A natural question at this point could be: to what extent are the previous inclusions of sets of $R$-modules strict?
+In the following diagram we give some examples in which these inclusions are strict, shown in red above the corresponding inclusion.
+We also point out under what assumptions we do get an equality, shown in green below the corresponding inclusion.
+
 \vspace{8mm}
 \begin{tikzpicture}[remember picture,overlay]
-    \ColorBox[xshift=23mm,fill=red!30,draw=red]{non ppal. ideal \\ \hspace{4mm}over a DD \\ \hspace{11.5mm}$\neq$ }
+    \ColorBox[xshift=23mm,fill=red!30,draw=red]{ \hspace{0.5mm}$(2,1+\sqrt{-5})$ \\ over $\Z[\sqrt{-5}]$ \\ \hspace{9.5mm}$\neq$ }
     \ColorBox[xshift=57mm,fill=red!30,draw=red]{\hspace{4mm}$\Q$ \\ over $\Z$ \\ \hspace{4.5mm}$\neq$ }
     \ColorBox[xshift=83mm,fill=red!30,draw=red]{\hspace{5mm}$(x,y)$ \\ over $\C[x,y]$ \\ \hspace{7mm}$\neq$ }
 \end{tikzpicture}
@@ -640,17 +644,17 @@ Namely, if $r\in R$ is not a zero-divisor, then
 \end{center}
 \vspace{6mm}
 \begin{tikzpicture}[remember picture,overlay]
-    \ColorBox[xshift=27.5mm,fill=green!30,draw=green]{\hspace{8.5mm} = \\ / PID or local}
-    \ColorBox[xshift=60mm,fill=green!30,draw=green]{\hspace{10mm} = \\ f.g. / Noeth.}
-    \ColorBox[xshift=86mm,fill=green!30,draw=green]{\hspace{2mm} = \\ / DD}
+    \ColorBox[xshift=27.5mm,fill=green!30,draw=green]{\hspace{11.5mm} = \\ over PID or local}
+    \ColorBox[xshift=62mm,fill=green!30,draw=green]{\hspace{10.5mm} = \\ f.g. over Noeth.}
+    \ColorBox[xshift=88mm,fill=green!30,draw=green]{\hspace{3mm} = \\ over DD}
 \end{tikzpicture}
 \vspace{8mm}
 
-In the above diagram, ppal.~stands for principal, DD stands for Dedekind domain, PID stands for principal ideal domain, f.g.~stands for finitely generated and Noeth.~stands for Noetherian.
+In the above diagram, DD stands for Dedekind domain \cite[Definition I.3.2]{neu99}, PID stands for principal ideal domain, f.g.~stands for finitely generated and Noeth.~stands for Noetherian.
 
 {\color{gray}
 \begin{proof}
-    To do!
+    The first example is treated in \cite[Example 13.8]{gat14}.
 \end{proof}
 }
 
