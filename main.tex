@@ -488,8 +488,8 @@ mark = at position 0.5 with
 \maketitle
 
 \begin{abstract}
-    Following \cite{hoc72} we provide an example of rings\footnote{We only consider the category of commutative rings with $1$.} $R,S$ such that $R[t]\cong S[t]$ but $R\not\cong S$, where $t$ is an indeterminate.
-    As a preparation for this counterexample we also study the notion of projective module and the hairy ball theorem.	
+    Following \cite{hoc72} we provide an example of (commutative unital) rings $R,S$ such that $R[t]\cong S[t]$ but $R\not\cong S$, where $t$ is an indeterminate.
+    As a preparation for this counterexample we also discuss the notion of projective module and the hairy ball theorem.	
 \end{abstract}
 
 \tableofcontents
@@ -572,6 +572,60 @@ Therefore we will discuss projective modules and the hairy ball theorem before j
 Let us look now at the abelian category of modules over a ring $R$.
 What does it mean for an $R$-module to be projective?
 
+\begin{prop}[{\cite[Lemma 1.1.2]{fra18}}]\label{prop:projective}
+    Let $R$ be a ring.
+    An $R$-module $P$ is projective if and only if it is a direct summand of some free module $F$.
+    Moreover, if $P$ is finitely generated, then we can also choose $F$ to be finitely generated.
+    \begin{proof}
+	If $P$ is (finitely generated) projective, consider a surjection $F\twoheadrightarrow P$ from a (finitely generated) free module $F$.
+	The resulting short exact sequence
+	\[ 0 \to K\to F\to P \to 0 \]
+	splits by \Cref{lm:projective}, hence $P$ is a direct summand of $F$.
+
+	Suppose conversely that $F=P\op K$ and consider a surjection $\varphi\colon M\twoheadrightarrow N$ and a morphism $f\colon P\to N$.
+	Then $\varphi\op \id_{K} \colon M\op K\twoheadrightarrow N\op K$ is again a surjection.
+	Since $F$ is free, the morphism $f\op \id_{K}\colon F\to N\op K$ can be lifted to a morphism $\bar{f}\op \id_{K}\colon F\to M\op K$, so that $\bar{f}\colon P\to M$ is the desired lifting of the original surjection $\varphi\colon M\twoheadrightarrow N$.
+    \end{proof}
+\end{prop}
+
+{\color{gray}
+\begin{cor}[{\cite[Cor.~1.1.28]{fra18}}]
+    Let $R$ be a ring.
+    A finitely presented $R$-module $P$ is projective if and only if $\Ext^{1}_{R}(P,T)=0$ for every finitely generated $R$-module $T$.
+    \begin{proof}
+	Pick a presentation
+	\[ 0\to K\to F\to P\to 0 \]
+	with $K$ finitely generated and $F$ finitely generated and free.
+	Then take the long exact sequence of $\Ext^{\bullet}_{R}(P,-)$ and use the assumption to find a splitting of the short exact sequence, exhibiting therefore $P$ as a direct summand of a free module.
+    \end{proof}
+\end{cor}
+}
+
+To close this section, let us briefly discuss the relation between being projective and other well-known module properties.
+Let $R$ be a ring.
+Recall that an $R$-module $M$ is called \textit{flat} if the functor $M\ot_{R}(-)$ is exact, and it is called \textit{torsion-free} if $0\in M$ is the only element $m\in M$ such that there exist a non-zero divisor $r\in R$ with $rm=0$.
+Then we have the following inclusions:
+
+\begin{center}
+    \begin{tikzcd}
+	\{ \text{Free} \} \tikzmark{a}\arrow[symbol=\subseteq]{r} & \{ \text{Projective} \} \tikzmark{b}\arrow[symbol=\subseteq]{r} & \{ \text{Flat} \} \arrow[symbol=\subseteq]{r} & \{ \text{Torsion-free} \}
+    \end{tikzcd}
+\end{center}
+
+The axiom of choice is equivalent to the statement that every set is a projective object in the category of sets.
+This implies in turn that every free module is projective.
+Indeed, this follows then from the universal property of free modules.
+More generally, if a functor $R$ preserves epimorphisms and $L\dashv R$, then $L$ preserves projective objects \cite[Dual of Fact 1.1.1]{fra18}.
+In our case $R$ would be the forgetful functor and $L$ would be the functor sending a set to the free module over this set.
+
+The fact that projective modules are flat follows again from the axiom of choice, but in this case it is a strictly weaker statement.
+What we need now is the existence of enough projective objects in the category of $R$-modules, so that we can compute the left-derived functors of $M\ot_{R}(-)$ with projective resolutions and argue as in \cite[Fact 1.2.1]{fra18}.
+In order to ensure this, it would suffice to have enough projective objects in the category of sets.
+
+Finally, that every flat module $M$ is torsion-free follows from the computation in \cite[Example 1.2.1]{fra18}.
+Namely, if $r\in R$ is not a zero-divisor, then
+\[ 0=\Tor^{R}_{1}(M,R/rR)\cong \ker(M\xrightarrow{r\cdot (-)}M). \]
+
 \vspace{8mm}
 \begin{tikzpicture}[remember picture,overlay]
     \ColorBox[xshift=23mm,fill=red!30,draw=red]{non ppal. ideal \\ \hspace{4mm}over a DD \\ \hspace{11.5mm}$\neq$ }
@@ -619,48 +673,16 @@ In the above diagram, ppal.~stands for principal, DD stands for Dedekind domain,
     It corresponds geometrically to the statement that vector bundles on affine space are all trivial.
 \end{rem}
 
+{\color{gray}
 \begin{rem}[{\cite{fra18}}]
     Baer's criterion \cite[Prop.~1.1.1]{fra18} allows us to characterise the dual notion of injective modules only in terms of $\Ext^{1}_{R}$ and quotients of the ring $R$ by its ideals.
     Indeed, an $R$-module $N$ is injective if and only if $\Ext^{1}_{R}(R/I,N)=0$ for every ideal $I\subseteq R$ \cite[Prop.~1.1.4]{fra18}.
     In general, no similar criterion for projectivity is available.
     In fact, the \textit{Whitehead problem} ---which states that if an abelian group $A$ has $\Ext^{1}_{\Z}(A,\Z)=0$, then it is free--- is undecidable in ZFC due to a result of Shelah.
 
-    {\color{gray}
     On the other hand, the notion of flatness, which agrees with projectivity for finitely generated modules over Noetherian rings, does have a general criterion similar to the previous one for injectivity.
-    Namely, an $R$-module $M$ is flat if and only if $\Tor_{1}^{R}(M,R/I)=0$ for every ideal $I\subseteq R$ \cite[Prop.~1.2.3]{fra18}.}
+    Namely, an $R$-module $M$ is flat if and only if $\Tor_{1}^{R}(M,R/I)=0$ for every ideal $I\subseteq R$ \cite[Prop.~1.2.3]{fra18}.
 \end{rem}
-
-Nevertheless, projectivity admits a different kind of criterion that will be useful for us later on:
-
-\begin{prop}[{\cite[Lemma 1.1.2]{fra18}}]\label{prop:projective}
-    Let $R$ be a ring.
-    An $R$-module $P$ is projective if and only if it is a direct summand of some free module $F$.
-    Moreover, if $P$ is finitely generated, then we can also choose $F$ to be finitely generated.
-    \begin{proof}
-	If $P$ is (finitely generated) projective, consider a surjection $F\twoheadrightarrow P$ from a (finitely generated) free module $F$.
-	The resulting short exact sequence
-	\[ 0 \to K\to F\to P \to 0 \]
-	splits by \Cref{lm:projective}, hence $P$ is a direct summand of $F$.
-
-	Suppose conversely that $F=P\op K$ and consider a surjection $\varphi\colon M\twoheadrightarrow N$ and a morphism $f\colon P\to N$.
-	Then $\varphi\op \id_{K} \colon M\op K\twoheadrightarrow N\op K$ is again a surjection.
-	Since $F$ is free, the morphism $f\op \id_{K}\colon F\to N\op K$ can be lifted to a morphism $\bar{f}\op \id_{K}\colon F\to M\op K$, so that $\bar{f}\colon P\to M$ is the desired lifting of the original surjection $\varphi\colon M\twoheadrightarrow N$.
-    \end{proof}
-\end{prop}
-
-{\color{gray}
-As a consequence of this criterion we also obtain a characterisation of projectivity for finitely presented modules in terms of $\Ext^{1}_{R}$ and finitely generated modules:
-
-\begin{cor}[{\cite[Cor.~1.1.28]{fra18}}]
-    Let $R$ be a ring.
-    A finitely presented $R$-module $P$ is projective if and only if $\Ext^{1}_{R}(P,T)=0$ for every finitely generated $R$-module $T$.
-    \begin{proof}
-	Pick a presentation
-	\[ 0\to K\to F\to P\to 0 \]
-	with $K$ finitely generated and $F$ finitely generated and free.
-	Then take the long exact sequence of $\Ext^{\bullet}_{R}(P,-)$ and use the assumption to find a splitting of the short exact sequence, exhibiting therefore $P$ as a direct summand of a free module.
-    \end{proof}
-\end{cor}
 }
 
 \section{Hairy ball theorem}
