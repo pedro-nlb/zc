@@ -474,6 +474,7 @@ mark = at position 0.5 with
 % Math operators
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\Tor}{Tor}
 \DeclareMathOperator{\id}{id}
 
@@ -656,19 +657,32 @@ In the above diagram, DD stands for Dedekind domain \cite[Definition I.3.2]{neu9
 {\color{gray}
 \begin{proof}
     The first example is discussed in \cite[Example 13.8]{gat14}.
-    Instead of reproducing Gathmann's discussion, let us argue why the ring $\Z[\scalebox{.9}{$\sqrt{-5}$}]$ was a natural place to look for such an examples, which also hints on how to produce similar examples.
+    Instead of reproducing Gathmann's discussion here, let us argue why the ring $\Z[\scalebox{.9}{$\sqrt{-5}$}]$ was a natural place to look for such an examples, which also hints on how to produce similar examples.
     Dedekind domains are hereditary rings, so all ideals are projective.
     One would then try to find a non principal ideal on a Dedekind domain, which then has necessarily a minimal number of two generators \cite[Exercise I.3.6]{neu99}.
     A Dedekind domain is a principal ideal domain if and only if it is a unique factorisation domain \cite[Proposition 13.27]{gat14}, so good candidates to look for non principal ideals are rings of integers of number fields in which we know that there is no unique factorisation into prime elements, such as $\Z[\scalebox{.9}{$\sqrt{-5}$}]$.
 
     That every projective module over a principal ideal domain is free follows from \Cref{prop:projective} and the fact that submodules of free modules over principal ideal domains are again free \cite[Theorem 9.8]{rot02}.
     That every projective module over a local ring is free is a result due to Kaplansky \cite[Corollary 26.7]{af92}, but easier proofs are available in the case of finitely generated modules over a noetherian local ring \cite[Proposition 1.3.1]{fra18}.
+
+    If $R$ is a Dedekind domain, then every localization $R_{\p}$ at a prime ideal $\p\in \Spec(R)$ is a principal ideal domain.
+    If $M$ is a torsion-free module and $\p\in \Spec(R)$, then $M_{\p}$ is a torsion-free $R_{\p}$-module, because localisation is an exact functor.
+    Since flatness can be checked locally \cite[Fact 1.2.6]{fra18}, it suffices to argue that torsion-free modules over a principal ideal domain are flat.
+    This follows from the analogue of Baer's criterion for flatness \cite[Proposition 1.2.3]{fra18} and the isomorphisms
+    \[ \Tor^{R}_{1}(M,R/rR)\cong \ker(M\xrightarrow{r\cdot (-)}M) \]
+    for all $r\in R\setminus\{ 0\}$ mentioned earlier.
+
+    That flat implies projective for finitely generated modules over a noetherian ring is a consequence of the local nature of both properties under these assumptions and the corresponding statement for finitely generated modules over a noetherian local ring, see \cite[Proposition 1.3.2]{fra18}.
+
+    The rationals $\Q$ are torsion-free over the Dedekind domain $\Z$, so they are also flat.
+    Every two rational numbers are linearly dependent over $\Z$, so $\Q$ cannot be a free $\Z$-module.
+    Therefore they cannot be a projective module either, because $\Z$ is a principal ideal domain.
+
+    Since $\C[x,y]$ is torsion-free over itself and $(x,y)$ is a submodule, $(x,y)$ is also torsion-free over $\C[x,y]$.
+    Since $\C[x,y]$ is noetherian and $(x,y)$ is finitely generated over $\C[x,y]$, if $(x,y)$ was flat over $\C[x,y]$, then it would also be projective over $\C[x,y]$.
+    By the Quillen--Suslin theorem mentioned below, this would in turn imply that $(x,y)$ is a free $\C[x,y]$, so $(x,y)$ cannot be a flat $\C[x,y]$-module.
 \end{proof}
-}
 
-{\color{red}{Finish previous proof!}}
-
-{\color{gray}
 \begin{rem}
     The example of $\Q$ as a $\Z$-module also shows that being projective depends on the base ring, since $\Q$ is projective over itself.
 \end{rem}
