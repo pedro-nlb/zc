@@ -222,6 +222,7 @@
 \newcommand{\bfZ}{\mathbf{Z}}
 
 % Mathfrak for ideals
+\newcommand{\p}{\mathfrak{p}}
 \renewcommand{\a}{\mathfrak{a}}
 \renewcommand{\b}{\mathfrak{b}}
 \renewcommand{\c}{\mathfrak{c}}
@@ -825,7 +826,7 @@ If we take the Whitney embedding theorem \cite[Theorem II.10.7]{bre93}, the tubu
 	\end{align*}
 	Geometrically, we are projecting the point $x+X(x)\in \R^{N}$ onto $M$ along the normal direction:
 
-	\todo{figure}
+	{\color{red}[add picture!]}
 
 	If $f(x)=x$, then the tangent direction of $X(x)$ is zero.
 	But $X(x)$ was by assumption a tangent vector at $x\in M$, so $X(x)=0$, contradicting the assumption that $X$ is non-vanishing.
@@ -833,9 +834,28 @@ If we take the Whitney embedding theorem \cite[Theorem II.10.7]{bre93}, the tubu
 
 	We have also shown as a consequence of the Whitney embedding theorem that $M$ is an euclidean neighbourhood retract.
 	Namely, $M$ is a retract of the open subset $B_{\varepsilon}M\subseteq \R^{N}$.
-	Therefore we may apply the Lefschetz--Hopf fixed point theorem \cite[Corollary IV.23.5]{bre93} to deduce that
+	Therefore we may apply the Lefschetz--Hopf fixed point theorem \cite[Corollary IV.23.5]{bre93} to deduce that $L(f)=0$.
+	Recall that the Lefschetz number $L(f)$ is defined as the alternating sum of traces of the morphisms induced by $f$ in homology with coefficients in $\Q$, so it is an homotopy invariant.
+	By scaling down the vectors in our vector field and repeating the process above we obtain a homotopy $f\simeq \id_{M}$, so $0=L(f)=L(\id_{M})$.
+	The trace of the identity on a vector space is its dimension, so $L(\id_{M})=\chi(M)=0$.
     \end{proof}
 \end{thm}
+
+\section{Nonuniqueness of coefficient rings}
+
+In this section we discuss the example in \cite{hoc72}, which shows that $R\cong S$ does not necessarily follow from $R[t]\cong S[t]$.
+
+Define $A:=\R[X,Y,Z]/(X^{2}+Y^{2}+Z^{2}-1)$, which is an integral domain because $X^{2}+Y^{2}+Z^{2}-1$ is irreducible in $\R[X,Y,Z]$ and thus $\p:=(X^{2}+Y^{2}+Z^{2}-1) \subseteq \R[X,Y,Z]$ is a prime ideal.
+Let $\phi\colon A^{\op 3}\to A$ be the $A$-linear homomorphism given by
+\[ (f+\p,g+\p,h+\p)\longmapsto fX+gY+hZ+\p \]
+for all $f,g,h\in\R[X,Y,Z]$.
+This homomorphism is surjective, because
+\[ \phi(X+\p,Y+\p,Z+\p)=X^{2}+Y^{2}+Z^{2}+\p=1+\p. \]
+Consider the short exact sequence of $A$-modules
+\[ 0\to E\to A^{\op 3}\xrightarrow{\phi} A\to 0, \]
+with $E=\ker(\phi)$.
+Since $A$ is projective over itself, the sequence splits and $A^{\op 3}\cong E\op A$.
+Therefore $E$ is a projective module.
 
 \bibliographystyle{alpha}
 \bibliography{main}
