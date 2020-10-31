@@ -717,7 +717,7 @@ In the above diagram, DD stands for Dedekind domain \cite[Definition I.3.2]{neu9
 
 In this section we will prove the hairy ball theorem following \cite{eg79}.
 
-\begin{thm}[Hairy ball theorem]
+\begin{thm}[Hairy ball theorem]\label{thm:hairyball}
     Every continuous vector field on the $2$-sphere $\bbS^{2}$ has at least one zero.
     \begin{proof}
 	We will use the following definitions and identifications:
@@ -752,7 +752,7 @@ In this section we will prove the hairy ball theorem following \cite{eg79}.
 	Therefore it induces a continuous function
 	\begin{align*}
 	    F\colon \bbD^{2} &\longrightarrow \bbS^{1} \\
-	    p &\longmapsto \frac{F(p)}{|F(p)|}.
+	    p &\longmapsto \frac{F(p)}{\lVert F(p)\rVert}.
 	\end{align*}
 	We repeat the same process with the south pole and $\bbS^{2}_{+}$.
 	This gives us a non-vanishing continuous function $W^{*}\colon \bbD^{2}\to \R^{2}$ that we can again normalise into a continuous function $F^{*}\colon \bbD^{2}\to \bbS^{1}$.
@@ -813,6 +813,8 @@ In this section we will prove the hairy ball theorem following \cite{eg79}.
 	    p  & \longmapsto R_{p}((-1,0,0))
 	\end{align*}
 	But this is a contradiction, because $c^{*}\colon \bbS^{1}\to \bbS^{1}$ is the morphism going twice around $\bbS^{1}$ at constant speed and starting from $(1,0,0)$, which is not nullhomotopic.
+
+	{\color{red}[Add picture!]}
     \end{proof}
 \end{thm}
 
@@ -840,9 +842,9 @@ If we take the Whitney embedding theorem \cite[Theorem II.10.7]{bre93}, the tubu
 	    f\colon M &\longrightarrow M\\
 	    x &\longmapsto r(x+X(x)).
 	\end{align*}
-	Geometrically, we are projecting the point $x+X(x)\in \R^{N}$ onto $M$ along the normal direction:
+	Geometrically, we are projecting the point $x+X(x)\in \R^{N}$ onto $M$ along the normal direction, in a way that is made precise by the tubular neighborhood theorem:
 
-	{\color{red}[add picture!]}
+	{\color{red}[Add picture!]}
 
 	If $f(x)=x$, then the tangent direction of $X(x)$ is zero.
 	But $X(x)$ was by assumption a tangent vector at $x\in M$, so $X(x)=0$, contradicting the assumption that $X$ is non-vanishing.
@@ -857,21 +859,109 @@ If we take the Whitney embedding theorem \cite[Theorem II.10.7]{bre93}, the tubu
     \end{proof}
 \end{thm}
 
+\begin{rem}
+    The converse is also true if we further assume orientability and connectedness, see \cite[Corollary VII.14.5]{bre93}.
+\end{rem}
+
 \section{Nonuniqueness of coefficient rings}
 
 In this section we discuss the example in \cite{hoc72}, which shows that $R\cong S$ does not necessarily follow from $R[t]\cong S[t]$.
 
-Define $A:=\R[X,Y,Z]/(X^{2}+Y^{2}+Z^{2}-1)$, which is an integral domain because $X^{2}+Y^{2}+Z^{2}-1$ is irreducible in $\R[X,Y,Z]$ and thus $\p:=(X^{2}+Y^{2}+Z^{2}-1) \subseteq \R[X,Y,Z]$ is a prime ideal.
+Define $A:=\R[x,y,z]/(x^{2}+y^{2}+z^{2}-1)$, which is an integral domain because $x^{2}+y^{2}+z^{2}-1$ is irreducible in $\R[x,y,z]$ and thus $\p:=(x^{2}+y^{2}+z^{2}-1) \subseteq \R[x,y,z]$ is a prime ideal.
 Let $\phi\colon A^{\op 3}\to A$ be the $A$-linear homomorphism given by
-\[ (f+\p,g+\p,h+\p)\longmapsto fX+gY+hZ+\p \]
-for all $f,g,h\in\R[X,Y,Z]$.
+\[ (f+\p,g+\p,h+\p)\longmapsto xf+yg+zh+\p \]
+for all $f,g,h\in\R[x,y,z]$.
 This homomorphism is surjective, because
-\[ \phi(X+\p,Y+\p,Z+\p)=X^{2}+Y^{2}+Z^{2}+\p=1+\p. \]
+\[ \phi(x+\p,y+\p,z+\p)=x^{2}+y^{2}+z^{2}+\p=1+\p. \]
 Consider the short exact sequence of $A$-modules
 \[ 0\to E\to A^{\op 3}\xrightarrow{\phi} A\to 0, \]
 with $E=\ker(\phi)$.
 Since $A$ is projective over itself, the sequence splits and $A^{\op 3}\cong E\op A$.
 Therefore $E$ is a projective module.
+
+Suppose that $E$ was a free module.
+Non-zero commutative rings have the invariant basis number property, so $E$ would necessarily be a rank $2$ free $A$-module.
+Let $e_{1}$ and $e_{2}$ be a basis of $E$ over $A$, say
+\[ e_{i}=(f_{i,1}+\p,f_{i,2}+\p,f_{i,3}+\p) \]
+for $i\in \{1,2\}$.
+A section of $\phi\colon A^{\op 3}\to A$ is given by
+\[ \sigma\colon f+\p \longmapsto (xf+\p,yf+\p,zf+\p). \]
+Therefore we can consider a new basis of $A^{\op 3}$ given by $e_{1},e_{2}$ and $(x+\p,y+\p,z+\p)$.
+The matrix transforming the canonical basis of $A^{\op 3}$ into this new basis is given by
+\[ M+\p:=\begin{pmatrix} f_{1,1}+\p & f_{2,1}+\p & x+\p \\
+    f_{1,2}+\p & f_{2,2}+\p & y+\p \\
+    f_{1,3}+\p & f_{2,3}+\p & z+\p
+\end{pmatrix} \in \operatorname{GL}_{3}(A). \]
+We regard each polynomial in $\R[x,y,z]$ as a continuous function $\R^{3}\to \R^{3}$.
+Since the value of $f\in \R[x,y,z]$ at a point $(x_{0},y_{0},z_{0})\in \bbS^{2}\subseteq \R^{3}$ does not depend on the choice of representative modulo $\p$ and $(x,y,z)\in \R[x,y,z]^{\op 3}$ yields an outward pointing vector at each point of $\bbS^{2}$, the basis elements $e_{1},e_{2}\in \ker(\phi)$ give us continuous tangent vector fields on the sphere $\bbS^{2}$.
+Now $\det(M+\p)\in A^{\times}$ is a unit, so there is some other $g+\p\in A$ such that $(g+\p)\det(M+\p)=1+\p$.
+So any representative $\det(M)\in\R[x,y,z]$ of $\det(M+\p)$ takes non-zero values on any point $(x_{0},y_{0},z_{0})\in \bbS^{2}$, because $\det(M)(x_{0},y_{0},z_{0})g(x_{0},y_{0},z_{0})=1$.
+In particular, the vector fields $e_{1}$ and $e_{2}$ are non-vanishing, which contradicts \Cref{thm:hairyball}.
+This contradiction shows that $E$ cannot be a free $A$-module.
+
+If $E$ was generated by only two elements $\alpha,\beta\in E$ over $A$, then $A^{\op 3}$ would be generated by $\alpha$, $\beta$ and $(x+\p,y+\p,z+\p)$.
+This would imply that they form a basis of $A^{\op 3}$, and in particular that $\alpha$ and $\beta$ are linearly independent over $A$, making them a basis of $E$.
+This would imply that $E$ is a free $A$-module, but we have seen in the previous paragraph that this is not the case.
+Therefore $E$ cannot be generated by less than three elements over $A$.
+
+The next step in the construction of Hochster's counterexample is to consider the symmetric algebras of our $A$-modules.
+Recall that there is a canonical $A$-algebra isomorphism $S(A)\cong A[t]$.
+Indeed, both $A$-algebras have the same universal property.
+Namely, the functor
+\[ S\colon \operatorname{Mod}(A)\to \operatorname{Alg}(A) \]
+from $A$-modules to (commutative) $A$-algebras is left adjoint to the forgetful functor.
+In particular $S(-)$ preserves colimits, so that
+\[ S(N\op N')\cong S(N)\ot_{A}S(N') \]
+is an isomorphism of $A$-algebras.
+Therefore, defining $B:=A[\alpha,\beta]$ and $C:=S(E)$ we have
+\[ B[t]= A[\alpha,\beta,t]\cong S(A^{\op 3})\cong S(E\op A)\cong S(E)\ot_{A}A[t] \cong S(E)[t]=C[t] \]
+as $A$-algebras.
+In particular, $B[t]\cong C[t]$ as rings.
+
+In order to achieve our goal it remains to show that $B\not\cong C$ as rings.
+We argue by contradiction.
+Suppose that $h\colon B\to C$ is a ring isomorphism.
+
+\iffalse
+\begin{lm}\label{lm:units}
+    The only invertible elements of $A$ are the non-zero real numbers.
+\end{lm}
+
+We have $C\subseteq C[t]\cong B[t]$ over $A$, so both $B$ and $C$ are $A$-subalgebras of $B[t]=A[\alpha,\beta,t]$.
+Since $A$ is an integral domain, the units in $B[t]$ are the invertible elements in $A$ \cite[Exercise 2 of \S 1]{am69}, hence the non-zero real numbers by \Cref{lm:units}.
+Therefore the units in $B$ and in $C$ are also the non-zero real numbers, and $h$ and its inverse send real numbers to real numbers.
+The real numbers have no field automorphisms, so $h$ must be an $R$-algebra isomorphism.
+\fi
+
+\begin{lm}\label{lm:frd}
+    The ring $A$ is a formally real domain, i.e.~$0$ is not a sum of non-zero squares.
+\end{lm}
+
+It follows by looking at the leading coefficients in a sum of squares that polynomial rings over $A$ are also formally real domains.
+Again by looking at the leading coefficients in a sum of squares we see that all the solutions of $t_{1}^{2}+t_{2}^{2}+t_{3}^{2}=1$ in $D[t]^{\op 3}$ are in $D^{\op 3}$ for any formally real domain $D$.
+This implies that all the solutions of such an equation in $A[\alpha,\beta,t]^{\op 3}=B[t]^{\op 3}$ are in $A^{\op 3}$.
+Therefore all the solutions of such an equation in $B^{\op 3}$ or in $C^{\op 3}$ are also in $A^{\op 3}$.
+As a consequence, $h(A)\subseteq A$.
+Indeed, it suffices to show that $h(x+\p),h(y+\p),h(z+\p)\in A$, and this follows from the previous remark and the observation that
+\[ h(x+\p)^{2}+h(y+\p)^{2}+h(z+\p)^{2}=1. \]
+Similarly, $h^{-1}(A)\subseteq A$.
+We may precompose $h$ with the automorphism of $B=A[\alpha,\beta]$ given by applying $h^{-1}$ to the coefficients of polynomials.
+This gives then an $A$-algebra isomorphism $A[\alpha,\beta]=B\cong C$.
+Hence $C$ can be generated as an $A$-algebra by two elements $c,c'\in C$, i.e.~$C\cong A[c,c']$ over $A$.
+Since $C=S(E)$ is a graded $A$-algebra, we may write $c=c_{0}+c_{1}+\ldots+c_{k}$ and $c'=c_{0}'+c_{1}'+\ldots+c_{k'}'$ in terms of their homogeneous components.
+Then $A[c,c']=A[c-c_{0},c'-c_{0}']\cong C$.
+
+Let now $e\in C$ be homogeneous element in degree $1$.
+We may then write it as
+\begin{align*}
+    e & = a_{0,0}+a_{1,0}(c_{1}+\ldots+c_{k})+a_{0,1}(c_{1}'+\ldots+c_{k'}')+ [\ldots]_{1} \\
+    & = a_{0,0}+a_{1,0}c_{1}+a_{0,1}c_{1}'+[\ldots]_{2}
+\end{align*}
+with $[\ldots]_{2}$ consisting of higher degree homogeneous terms.
+In the previous equalities, $a_{0,0}$ is an element of $A=S^{0}(E)$, so it must be zero by our assumption on the degree of $e$.
+And again for degree reasons we must have $[\ldots]_{2}=0$ as well.
+This shows that the degree $1$ part of $C=S(E)$ is generated by $c_{1}$ and $c_{1}'$ over $A$.
+But the degree $1$ part of $C$ is $S^{1}(E)\cong E$, so this contradicts our previous conclusion that $E$ requires at least three generators.
 
 \bibliographystyle{alpha}
 \bibliography{main}
