@@ -931,8 +931,31 @@ Both $B$ and $C$ are $\R$-algebras, because they are $A$-algebras.
 But a priori $h$ may not be an $\R$-algebra homomorphism.
 In this subsection we make sure that in fact $h$ has to be an $\R$-algebra isomorphism.
 
-\begin{lm}\label{lm:units}
-    The only invertible elements of $A$ are the non-zero real numbers.
+\begin{lm}[{\cite[Lemma 9.1]{swa87}}]\label{lm:units}
+    The only invertible elements of $A$ are (the equivalence classes of) the non-zero real numbers.
+    \begin{proof}
+	We first consider the complexification $A_{\C}:=A\ot_{\R}\C$, which remains an integral domain because $x^{2}+y^{2}+z^{2}-1$ remains irreducible over $\C[x,y,z]$.
+	We compute its group of units.
+	Over the complex number, we may rewrite the equation $x^{2}+y^{2}+z^{2}-1=0$ as $uv+z^{2}-1=0$, where $u=x+iy$ and $v=x-iy$, so that $A_{\C}$ can be rewritten as
+	\[ \C[z,u,v]/(uv+z^{2}-1). \]
+	We invert $u$ and all its powers for a moment, and since
+	\[ v=\frac{1-z^{2}}{u}, \]
+	we obtain
+	\[ (A_{\C})_{u}\cong \C[z,u,u^{-1}]. \]
+	That is, $(A_{\C})_{u}$ are Laurent polynomials over the integral domain $\C[z]$.
+	So the units of $(A_{\C})_{u}$ are precisely of the form $\lambda u^{m}$ with $\lambda\in \C[z]^{\times}=\C^{\times}$ and $m\in \Z$.
+	Since $A_{\C}$ was an integral domain and $u\neq 0$, the localization $A_{\C}\to (A_{\C})_{u}$ is injective, so $A_{\C}^{\times}\subseteq (A_{\C})_{u}^{\times}$.
+	And $u\not\in A_{\C}^{\times}$, because $A_{\C}/(u)\cong \C[v,z]/(z^{2}-1)\neq 0$.
+	Therefore $A_{\C}^{\times}\subseteq \C^{\times}$.
+	But $\C$ is a field, so $\C\to A_{\C}$ is injective and $\C^{\times}\subseteq A_{\C}^{\times}$ as well, hence
+	\[ A_{\C}^{\times}=\C^{\times}. \]
+
+	Now we consider our $\R$-algebra $A$ again.
+	It is a subalgebra of $A_{\C}$, so $A^{\times}\subseteq A_{\C}^{\times}=\C^{\times}$.
+	Again because $\R$ is a field we also have that $\R^{\times}\subseteq A^{\times}$, so it remains to check that conversely every unit in $A^{\times}$ is the equivalence class of a non-zero real number.
+	Let $a\in A^{\times}$ and look at its image in $A_{\C}$, which is then the equivalence class of some non-zero complex number $\lambda\in \C^{\times}$.
+	This element comes from $A$, so it has to be invariant under the Galois action of $\operatorname{Gal}(\C/\R)$ on $A_{\C}$, thus has to be the equivalence class of a non-zero real number and $A^{\times}=\R^{\times}$.
+    \end{proof}
 \end{lm}
 
 We have $C\subseteq C[t]\cong B[t]$ over $A$, so both $B$ and $C$ are $A$-subalgebras of $B[t]=A[\alpha,\beta,t]$.
