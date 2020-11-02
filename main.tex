@@ -699,8 +699,8 @@ In the above diagram, DD stands for Dedekind domain \cite[Definition I.3.2]{neu9
 \end{rem}
 
 \begin{rem}
-    The left-most equality in the diagram above is also true for finitely generated modules over polynomial rings with coefficients on a principal ideal domain.
-    This is an important result, first asked by Serre in the case of fields, and later proven independently by Quillen and Suslin, see the \href{https://en.wikipedia.org/wiki/Quillen-Suslin_theorem}{Wikipedia article on the Quillen--Suslin theorem}.
+    The left-most equality in the diagram above is also true for finitely generated modules over polynomial rings with coefficients in a field.
+    This is an important result first asked by Serre and later proven independently by Quillen and Suslin, see the \href{https://en.wikipedia.org/wiki/Quillen-Suslin_theorem}{Wikipedia article on the Quillen--Suslin theorem}.
     It corresponds geometrically to the statement that vector bundles on affine space are all trivial.
 \end{rem}
 
@@ -1011,6 +1011,45 @@ But the degree $1$ part of $C$ is $S^{1}(E)\cong E$, so this contradicts our pre
 Therefore $B$ and $C$ cannot be isomorphic as rings, even though $B[t]$ and $C[t]$ are isomorphic as $A$-algebras.
 
 \section{Final remarks}
+
+\subsection{History of the problem}
+In this subsection we just mention a few key points, refering to the survey \cite{gup15} for a much more detailed discussion.
+If $A$ and $B$ are $R$-algebras, we use $A\cong_{R} B$ to denote an $R$-algebra isomorphism from now on.
+
+Zariski originally raised his cancellation problem in 1949 in the following setting:
+
+\begin{q}
+    Let $L$ and $L'$ be two finitely generated fields over a field $k$ and let $L(x)$ and $L'(x)$ be simple transcendental extensions of $L$ and $L'$ respectively.
+    Does $L(x)\cong L'(x)$ imply $L\cong L'$?
+\end{q}
+
+The answer is affirmative only under extra assumptions, but not in general.
+In the early 70's mathematicians started to think about the analogous problems over rings.
+To simplify the remaining discussion, let us introduce the following definition:
+
+\begin{defn}
+    Let $k$ be a field and let $A$ be a $k$-algebra.
+    $A$ is said to be \textit{cancellative} if for every $k$-algebra $B$ we have
+    \[ A[x]\cong_{k}B[x]\Rightarrow A\cong_{k} B, \]
+    where $x$ is an indeterminate.
+\end{defn}
+
+Abhyankar \textit{et al.} showed in 1972 that one dimensional integral domains of transcendence degree one over a field $k$ are cancellative.
+But in that context Hochster published also his example \cite{hoc72}, showing that not all algebras are cancellative.
+So the $k$-algebra version of the question also had a negative answer in general.
+
+Therefore we weaken a bit more the question and ask ourselves:
+
+\begin{q}
+    Are polynomial rings $k[x_{1},\ldots,x_{n}]$ over a field $k$ cancellative?
+\end{q}
+
+This is what then became known as the Zariski cancellation problem.
+The answer is affirmative for $n\in \{1,2\}$ independently of the base field $k$.
+In positive characteristic the answer is negative for any $n\geqslant 3$.
+Over characteristic zero, the problem is still open for all $n\geqslant 3$.
+
+
 
 
 \bibliographystyle{alpha}
